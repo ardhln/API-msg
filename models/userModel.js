@@ -19,13 +19,13 @@ const userSchema = new mongoose.Schema({
     required: true,
     min: 8,
   },
-  isFotoProfileSet: { // Mengubah nama field
+  isFotoProfileSet: { 
     type: Boolean,
     default: false,
   },
-  fotoProfile: { // Mengubah nama field
+  fotoProfile: { 
     type: String,
-    default: "", // Ubah sesuai kebutuhan
+    default: "", 
   },
 });
 
