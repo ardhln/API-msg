@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const multer = require("multer");
 const path = require("path");
 
-const uploadDir = path.join(__dirname, "../profil"); // Direktori penyimpanan foto profil
+const uploadDir = path.join(__dirname, "../profil");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -60,7 +60,7 @@ module.exports.getAllUsers = async (req, res, next) => {
     const users = await User.find({ _id: { $ne: req.params.id } }).select([
       "email",
       "username",
-      "fotoProfile", // Mengubah nama field dari "avatarImage" menjadi "fotoProfile"
+      "fotoProfile",
       "_id",
     ]);
     return res.json(users);
@@ -72,18 +72,18 @@ module.exports.getAllUsers = async (req, res, next) => {
 module.exports.setFotoProfil = async (req, res, next) => {
   try {
     const userId = req.params.id;
-    const imageFile = req.file; // Mengambil file gambar yang diunggah dengan multer
+    const imageFile = req.file;
 
     if (!imageFile) {
       return res.status(400).json({ msg: "File gambar diperlukan." });
     }
 
-    // Menyimpan informasi foto profil ke dalam database
+    
     const user = await User.findByIdAndUpdate(
       userId,
       {
         isFotoProfilSet: true,
-        fotoProfile: imageFile.filename, // Menyimpan nama file gambar
+        fotoProfile: imageFile.filename,
       },
       { new: true }
     );
