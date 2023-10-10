@@ -2,18 +2,17 @@ const Messages = require("../models/messageModel");
 const multer = require("multer");
 const path = require("path");
 
-// Konfigurasi penyimpanan file dengan multer
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "uploads/"); // Folder penyimpanan file
+    cb(null, "uploads/"); 
   },
   filename: function (req, file, cb) {
     let ext = path.extname(file.originalname);
-    cb(null, Date.now() + ext); // Nama file yang disimpan dengan ekstensi
+    cb(null, Date.now() + ext);
   },
 });
 
-// Inisialisasi multer dengan konfigurasi penyimpanan
 const upload = multer({
   storage: storage,
   fileFilter: function (req, file, callback) {
@@ -28,7 +27,7 @@ const upload = multer({
     }
   },
   limits: {
-    fileSize: 1024 * 1024 * 2, // Batas ukuran file (2MB)
+    fileSize: 1024 * 1024 * 2,
   },
 });
 
@@ -57,16 +56,16 @@ module.exports.getMessages = async (req, res, next) => {
 module.exports.addMessage = async (req, res, next) => {
   try {
     const { from, to, message } = req.body;
-    const file = req.file; // Mengambil file yang diunggah dengan multer
+    const file = req.file;
 
-    // Membuat objek pesan
+    
     const newMessage = {
       text: message,
       users: [from, to],
       sender: from,
     };
 
-    // Jika ada file yang diunggah, tambahkan ke objek pesan
+    
     if (file) {
       newMessage.file = {
         filename: file.filename,
