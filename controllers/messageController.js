@@ -76,7 +76,7 @@ module.exports.addMessage = async (req, res, next) => {
     const data = await Messages.create(newMessage);
 
     if (data) return res.json({ msg: "Message added successfully." });
-    else return res.json({ msg: "Failed to add message to the database" });
+    else return res.json({ msg: "Failed to add message. " });
   } catch (ex) {
     next(ex);
   }
