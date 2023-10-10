@@ -12,7 +12,7 @@ const MessageSchema = mongoose.Schema(
       ref: "User",
       required: true,
     },
-    // Menambahkan properti untuk menyimpan file (contoh: image)
+    
     file: {
       filename: String,
       path: String,
